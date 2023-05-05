@@ -1,3 +1,4 @@
+#LIBFLAG, 
 #--- generic settings ----------------------------------------------
 # settings for C++ compiler:
 C      = gcc
@@ -28,7 +29,7 @@ ifeq ($(ARCH),Linux)
     LIBS += $(shell pkg-config --libs libpulse-simple)
   endif
 
-  LUALIB = -llua -ldl
+  LUALIB = -lluajit -ldl
   CFLAGS += -DHAVE_GETTIMEOFDAY $(if $(filter 1,$(USE_PULSE)),-D__LINUX_PULSE__,-D__LINUX_ALSA__) #-D__LINUX_OSS__
   DLLFLAGS =  -fPIC -shared
   DLLSUFFIX = .so
@@ -37,7 +38,7 @@ ifeq ($(ARCH),Linux)
 else  
   ifeq ($(ARCH),Darwin) # MacOSX
     LIBS          = $(LIBDIR) $(LIB)
-    LUALIB      = -L/usr/local/lib -llua
+    LUALIB      = -L/usr/local/lib -lluajit
     CFLAGS += -DHAVE_GETTIMEOFDAY -D__MACOSX_CORE__
     DLLFLAGS = -bundle 
     DLLSUFFIX = .so
@@ -45,7 +46,7 @@ else
     
   else  # windows, MinGW
     LIBS          = $(LIBDIR) $(LIB) -lole32 -ldsound -lwinmm -mconsole -s
-    LUALIB      = -Llua/src -llua51
+    LUALIB      = -Lluajit/src -llua51
     SDLLIB = -lmingw32 -lSDLmain -lSDL -mconsole -s
     CFLAGS += -D__WINDOWS_DS__
     DLLFLAGS =  -shared
@@ -108,3 +109,7 @@ rtaudio/RtAudio.o: rtaudio/RtAudio.cpp rtaudio/RtAudio.h rtaudio/RtError.h
 example.o: example.cpp $(HDR)
 playAudioSdl.o: playAudioSdl.cpp proAudioSdl.h proAudio.h
 proAudioSdl.o: proAudioSdl.cpp proAudioSdl.h proAudio.h
+
+install:
+   	echo "install"
+
