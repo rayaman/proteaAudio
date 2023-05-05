@@ -1,3 +1,6 @@
 [submodule "rtaudio"]
 	path = rtaudio
 	url = https://github.com/tmatth/RtAudio.git
+[submodule "luajit"]
+	path = luajit
+	url = https://github.com/LuaJIT/LuaJIT.git

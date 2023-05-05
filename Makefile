@@ -3,7 +3,7 @@
 C      = gcc
 CC     = g++
 CFLAGS = -O2 -Wall -fPIC # -D_DEBUG -g
-INCDIR = -Irtaudio -Irtaudio/include -I../lua/src
+INCDIR = -Irtaudio -Irtaudio/include -Iluajit/src
 
 # linker settings:
 LCC    = ar
@@ -45,7 +45,7 @@ else
     
   else  # windows, MinGW
     LIBS          = $(LIBDIR) $(LIB) -lole32 -ldsound -lwinmm -mconsole -s
-    LUALIB      = -L../lua/src -llua51
+    LUALIB      = -Llua/src -llua51
     SDLLIB = -lmingw32 -lSDLmain -lSDL -mconsole -s
     CFLAGS += -D__WINDOWS_DS__
     DLLFLAGS =  -shared
